@@ -22,7 +22,6 @@ pipeline {
 			steps {
 				sh "docker tag tomcatwebapp:${env.BUILD_ID} mansing2/tomcatwebapp:${env.BUILD_ID}"
 				sh "docker push mansing2/tomcatwebapp:${env.BUILD_ID}"
-				sh "sudo su"
 				sh "ansible-playbook /home/ubuntu/Ansible_host/ansible-playbook.yml --extra-vars tag=${env.BUILD_ID}"
 			}
 		}
