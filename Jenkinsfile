@@ -3,6 +3,7 @@ pipeline {
 	stages {
 		stage ('Build') {
 			steps {
+				echo 'Compiling the code'
 				sh 'mvn clean package'
 			}
 			post {
@@ -15,6 +16,11 @@ pipeline {
 		stage ('Pre-Prod'){
 			steps {
 				sh "docker run -dit -p 8888:8080 tomcatwebapp:${env.BUILD_ID}"
+			}
+		}
+		stage ('Prod'){
+			steps {
+				sh "ansible-playbook /home/ubuntu/Ansible_host/ansible-playbook.yml --extra-vars "tag=${env.BUILD_ID}""
 			}
 		}
 		}
