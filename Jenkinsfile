@@ -9,14 +9,10 @@ pipeline {
 				success {
 					echo 'now archiving'
 					archiveArtifacts artifacts: '**/target/*.war'
+ 					bat 'docker build . -t tomcatwebapp:${env.BUILD_ID}'
 				}
 			}
 		}
-		stage ('deploy to QA') {
-			steps {
-				build job: 'Practice-Deploy-QA'
-			}
 		}
-	}
 }
 			
