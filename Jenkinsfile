@@ -18,6 +18,12 @@ pipeline {
 				sh "docker run -dit -p 8888:8080 tomcatwebapp:${env.BUILD_ID}"
 			}
 		}
+		stage ('Approval')
+			{
+				steps{
+					input "Deploy to prod?"
+				}
+			}
 		stage ('Prod'){
 			steps {
 				sh "docker tag tomcatwebapp:${env.BUILD_ID} mansing2/tomcatwebapp:${env.BUILD_ID}"
