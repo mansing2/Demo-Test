@@ -1,1 +1,1 @@
-Hello, Mindtree! This application is a demo app. 
+Hello, ECS! This application is a demo app. 
